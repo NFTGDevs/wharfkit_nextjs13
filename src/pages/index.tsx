@@ -131,7 +131,7 @@ const Home = (): JSX.Element => {
           <StyledButton id="login-button" className='btn btn-primary' variant='contained' onClick={() => handleLogout()}>Logout</StyledButton>}
 
         {!accountDetails ? null : <StyledButton id="login-button" className='btn btn-primary' 
-        onClick={() => handleTransact()}>Send <StyledInput ref={inputRef} onClick={(e) => e.stopPropagation()} type="number" onChange={(e) => handleChange(e)} value={txAmt} step={1} min={0.444} /> WAX to NFTG</StyledButton>}
+        onClick={() => handleTransact()}>Send <StyledInput aria-label="Tip Amount" ref={inputRef} onClick={(e) => e.stopPropagation()} type="number" onChange={(e) => handleChange(e)} value={txAmt} step={1} min={0.444} /> WAX to NFTG</StyledButton>}
         <div style={{marginTop: '40px'}}>
           <Button variant="outlined"> 
         <Link href="/otherPage">Go to the Other Page </Link>
