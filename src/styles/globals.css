@@ -170,6 +170,7 @@
   --white-overlay-11: hsla(0, 0%, 100%, 0.592);
   --white-overlay-12: hsla(0, 0%, 100%, 0.923);
 
+  --primary-color: var(--blue-color-5);
   --bg-color: #16171b;
   --text-color: #fff;
 }
@@ -215,4 +216,5 @@ a {
 * {
   box-sizing: border-box;
 }
+ 
  

@@ -45,16 +45,13 @@ const [accountDetails, setAccountDetails] = useState<any>(null)
             </Head>
 
             <main id="app" className={styles.main}>
-                <h1 className={styles.title} style={{ marginBottom: '40px' }}>
-                    Welcome to the <a href="#!">Other Page</a>
-                </h1>
- 
-                <StyledContainer>
-          <Typography variant="h4" component="span" gutterBottom >
-            {accountDetails ? `Hi, ${accountDetails?.actor}!` : 'Please login to continue'}
-          </Typography>
-        </StyledContainer>
-   
+            <Typography variant="h1" component="span" gutterBottom >
+        <h1 className={styles.title}>
+         {accountDetails ? `Hi, ${accountDetails?.actor}!` : ''}   <br/>
+          Welcome to <Link target={'_blank'} href="https://nextjs.org">Next.js </Link>
+          & <Link target={'_blank'} style={{color: '#1cb095'}} href="https://wharfkit.com/">Wharf!</Link>
+        </h1>
+ </Typography>
         <Button variant="outlined" sx={{mt:4}}> 
         <Link href="/">Back to Home</Link>
         </Button>

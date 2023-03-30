@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@emotion/react': ^11.10.6
   '@emotion/styled': ^11.10.6
-  '@mui/material': ^5.11.14
+  '@mui/material': ^5.11.15
   '@tanstack/react-query': ^4.28.0
   '@types/node': 18.15.10
   '@types/react': 18.0.30
@@ -647,8 +647,8 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /caniuse-lite/1.0.30001472:
-    resolution: {integrity: sha512-xWC/0+hHHQgj3/vrKYY0AAzeIUgr7L9wlELIcAvZdDUHlhL/kNxMdnQLOSOQfP8R51ZzPhmHdyMkI0MMpmxCfg==}
+  /caniuse-lite/1.0.30001473:
+    resolution: {integrity: sha512-ewDad7+D2vlyy+E4UJuVfiBsU69IL+8oVmTuZnH5Q6CIUbxNfI50uVpRHbUPDD6SUaN2o0Lh4DhTrvLG/Tn1yg==}
     dev: false
 
   /chalk/2.4.2:
@@ -871,7 +871,7 @@ packages:
     dependencies:
       '@next/env': 13.2.4
       '@swc/helpers': 0.4.14
-      caniuse-lite: 1.0.30001472
+      caniuse-lite: 1.0.30001473
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
