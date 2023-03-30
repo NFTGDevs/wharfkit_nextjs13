@@ -26,16 +26,16 @@ import { Button, Container, Typography } from '@mui/material';
  
 
 const otherPage = () => {
-const { session,  account } = useContext(SessionContext);
+const { account } = useContext(SessionContext);
 const [accountDetails, setAccountDetails] = useState<any>(null)
     useEffect(() => {
-        if (session) {
+        if (account) {
             setAccountDetails(account)
         }
         return () => {
             setAccountDetails(null)
           }
-    }, [session])
+    }, [account])
     return (
         <Container className={styles.container}>
             <Head>
@@ -47,9 +47,10 @@ const [accountDetails, setAccountDetails] = useState<any>(null)
             <main id="app" className={styles.main}>
             <Typography variant="h1" component="span" gutterBottom >
         <h1 className={styles.title}>
-         {accountDetails ? `Hi, ${accountDetails?.actor}!` : ''}   <br/>
-          Welcome to <Link target={'_blank'} href="https://nextjs.org">Next.js </Link>
-          & <Link target={'_blank'} style={{color: '#1cb095'}} href="https://wharfkit.com/">Wharf!</Link>
+         {accountDetails ? `Hi, ${accountDetails?.actor}! ` : ''} 
+         <br/>  Welcome to The Other <br/> <Link target={'_blank'} href="https://nextjs.org">Next.js </Link>
+          & <Link target={'_blank'} style={{color: '#1cb095'}} href="https://wharfkit.com/">Wharf </Link>
+          Page!
         </h1>
  </Typography>
         <Button variant="outlined" sx={{mt:4}}> 
