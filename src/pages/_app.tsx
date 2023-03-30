@@ -21,6 +21,7 @@ import { WebUIRenderer } from '@wharfkit/web-ui-renderer';
       ui.appendDialogElement() 
     }
     document.body.setAttribute('data-theme', 'dark')
+    document.documentElement.setAttribute('lang', 'en')
   },[])
   return (
     <SessionProvider>
