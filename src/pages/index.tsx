@@ -3,14 +3,14 @@ import { SessionContext } from '../context';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import styled from '@emotion/styled'; 
+import styled from '@emotion/styled';
 import styles from '../styles/Home.module.css';
 
 import truncStrMid from '../utils/truncStrMid';
 
 import Layout from '../layouts'
 import { Container, Typography, Button, Stack } from '@mui/material';
-import Toast from '../components/Toast'; 
+import Toast from '../components/Toast';
 
 
 export const StyledButton = styled(Button)`
@@ -45,28 +45,36 @@ export const StyledInput = styled.input`
     color: var(--blue-color-9);
   }
 `;
- 
+type ToastProps<T> = {
+  response: T;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  severity: "success" | "error";
+  vert: "top" | "bottom";
+  horz: "left" | "center" | "right";
+  children: string;
+};
 const Home = (): JSX.Element => {
   const { session, login, logout, account, setAccount } = useContext(SessionContext);
   const [accountDetails, setAccountDetails] = useState<any | null>(null);
   const [txAmt, setTxAmt] = useState<number>(0.444);
   const [txStatus, setTxStatus] = useState<any>(null);
-  const [open, setOpen] =  useState(false);
-  let inputRef:any = useRef(null)
- 
+  const [open, setOpen] = useState(false);
+  let inputRef: any = useRef(null)
+
   useEffect(() => {
     setAccountDetails(account);
- 
-  inputRef.current?.addEventListener("click", function() {
-    console.log("clicked")
-  })
- 
+
+    inputRef.current?.addEventListener("click", function () {
+      console.log("clicked")
+    })
+
   }, [account]);
 
   const handleChange = (e: any) => {
     setTxAmt(e.target.value);
   };
- 
+
   const handleLogin = async () => {
     try {
       if (!session) {
@@ -78,11 +86,11 @@ const Home = (): JSX.Element => {
     } catch (error) {
       console.log('Error occurred during login:', error);
     }
- 
+
   };
 
   const handleLogout = async () => {
-   await logout();
+    await logout();
     setAccount(null);
   };
 
@@ -113,7 +121,7 @@ const Home = (): JSX.Element => {
         console.log('error caught in transact', e);
       });
   };
- 
+
   return (
     <div className={styles.container}>
       <Head>
@@ -122,30 +130,44 @@ const Home = (): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main id="app" className={styles.main}>
-      <Typography variant="h1" component="span" gutterBottom >
-        <h1 className={styles.title}>
-         {accountDetails ? `Hi, ${accountDetails?.actor}!` : ''}   <br/>
-          Welcome to <Link target={'_blank'} href="https://nextjs.org">Next.js </Link>
-          & <Link target={'_blank'} style={{color: '#1cb095'}} href="https://wharfkit.com/">Wharf!</Link>
-        </h1>
- </Typography>
+        <Typography variant="h1" component="span" gutterBottom >
+          <h1 className={styles.title}>
+            {accountDetails ? `Hi, ${accountDetails?.actor}!` : ''}   <br />
+            Welcome to <Link target={'_blank'} href="https://nextjs.org">Next.js </Link>
+            & <Link target={'_blank'} style={{ color: '#1cb095' }} href="https://wharfkit.com/">Wharf!</Link>
+          </h1>
+        </Typography>
         {!accountDetails ? <StyledButton id="login-button" className='btn btn-primary' variant='contained' onClick={() => handleLogin()}>Login</StyledButton> :
           <StyledButton id="login-button" className='btn btn-primary' variant='contained' onClick={() => handleLogout()}>Logout</StyledButton>}
 
-        {!accountDetails ? null : <StyledButton id="login-button" className='btn btn-primary' 
-        onClick={() => handleTransact()}>Send <StyledInput aria-label="Tip Amount" ref={inputRef} onClick={(e) => e.stopPropagation()} type="number" onChange={(e) => handleChange(e)} value={txAmt} step={1} min={0.444} /> WAX to NFTG</StyledButton>}
-        <div style={{marginTop: '40px'}}>
-          <Button variant="outlined"> 
-        <Link href="/otherPage">Go to the Other Page </Link>
+        {!accountDetails ? null : <StyledButton id="login-button" className='btn btn-primary'
+          onClick={() => handleTransact()}>Send <StyledInput aria-label="Tip Amount" ref={inputRef} onClick={(e) => e.stopPropagation()} type="number" onChange={(e) => handleChange(e)} value={txAmt} step={1} min={0.444} /> WAX to NFTG</StyledButton>}
+        <div style={{ marginTop: '40px' }}>
+          <Button variant="outlined">
+            <Link href="/otherPage">Go to the Other Page </Link>
           </Button>
         </div>
         <Stack spacing={2} sx={{ width: '100%' }}>
-      <Toast response={txStatus} open={open} setOpen={setOpen} 
-      severity={txStatus?.response?.processed?.receipt?.status === "executed" ? "success" : "error"} 
-      vert="top" horz="right" >
-        {truncStrMid(txStatus?.response?.processed?.receipt?.status === "executed" ? txStatus.response.transaction_id : "Error", 4)}
-      </Toast>
-    </Stack>
+          <Toast
+            response={txStatus}
+            open={open}
+            setOpen={setOpen}
+            severity={
+              txStatus?.response?.processed?.receipt?.status === "executed"
+                ? "success"
+                : "error"
+            }
+            vert="top"
+            horz="right"
+          >
+            {txStatus?.response?.transaction_id ? <Link style={{textDecoration: 'underline'}} target={'_blank'} href={`https://waxblock.io/transaction/${txStatus.response.transaction_id}`}>
+              {truncStrMid(txStatus.response.transaction_id,4)}
+            </Link> : ''}
+
+
+          </Toast>
+
+        </Stack>
       </main>
     </div>
   )

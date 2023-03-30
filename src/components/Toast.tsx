@@ -16,9 +16,25 @@ const StyledAlert = styled(Alert)`
     position: relative;
   } 
 `
-
-const Toast:any = ({open, setOpen, children, ...rest}:any) => {
-        let { response } = rest;
+type ToastProps<T> = {
+  response: T;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  severity: "success" | "error";
+  vert: "top" | "bottom";
+  horz: "left" | "center" | "right";
+  children: string;
+};
+const Toast =  ({ 
+  open,
+  setOpen,
+  severity,
+  vert,
+  horz,
+  children,
+  ...rest
+}:any) => {
+        let { response }:any = rest;
 
        const status = response?.response?.processed?.receipt?.status 
         const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -31,13 +47,14 @@ const Toast:any = ({open, setOpen, children, ...rest}:any) => {
       
         return (
           <Stack direction={'row'} spacing={2} sx={{ width: '100%',  }}>            
-            <Snackbar open={open} autoHideDuration={33000} onClose={handleClose} anchorOrigin={{
+            <Snackbar open={open} autoHideDuration={4444} onClose={handleClose} anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
               }}>
               <StyledAlert onClose={handleClose}  sx={{ height: '100%',display: 'flex', minWidth: '444px'  }}>
-                <Typography variant="h6" component="div" sx={{ml:2}} >
-                  {status ? "Success! transaction" : "Something went wrong"} : {children}
+                <Typography variant="h6" component="div" sx={{ml:2}}>
+                  {status ? "Success! transaction: " : "Something went wrong"} 
+                  {children}
                 </Typography>
               </StyledAlert>
             </Snackbar>
